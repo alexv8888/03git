@@ -1,19 +1,30 @@
-name: 'tab count'
-
+name: xx
 on: push
 
-jobs:
 
-  tabcount:
+jobs:
+  build:
     runs-on: ubuntu-latest
-#    
-        
+    name: changed-files
     steps:
-      - name: checkout
-        uses: actions/checkout@v2.4.2
-  
-      - uses: lots0logs/gh-action-get-changed-files@2.1.4
+      - uses: actions/checkout@v2
         with:
-          token: ${{ secrets.TOKEN }}
-      - run: cat ${HOME}/files.json
-      
+          fetch-depth: 0 
+
+      - id: files
+        uses: jitterbit/get-changed-files@v1
+        with:
+          format: 'json'
+        
+  count:      
+    runs-on: ubuntu-latest   
+    strategy:
+      matrix:
+        cf: ${{fromJson(build.steps.files.outputs.removed)}}
+    steps:
+      - name: List all changed files
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file was changed" >> files.log 2>&1
+            echo "Count Tab in files: `grep -P '\t' $file | wc -l`" >> files.log 2>&1 
+          done
