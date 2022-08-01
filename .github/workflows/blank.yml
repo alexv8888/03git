@@ -15,15 +15,5 @@ jobs:
         uses: jitterbit/get-changed-files@v1
         with:
           format: 'json'
-      - run:
-          mapfile -d ',' -t added_modified_files < <(printf '%s,' '${{ steps.files.outputs.added_modified }}') 
-        id: ff
-  count:      
-    runs-on: ubuntu-latest   
-    needs: build
-    strategy:
-      matrix:
-        cf: ${needs.buils.steps.ff.added_modified_files[@]}
-    steps:
-      - name: List all changed files
-        run: pwd
+      - run: ls
+
