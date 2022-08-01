@@ -1,6 +1,11 @@
 name: 'tab count'
 
-on: push
+on: 
+  push:
+    branches:
+      - features/do_one
+      - dev
+      - master
 
 jobs:
 
