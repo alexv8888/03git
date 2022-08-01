@@ -21,7 +21,7 @@ jobs:
     needs: build
     strategy:
       matrix:
-        cf: ${{needs.build.steps.files.outputs.removed}}
+        cf: ${{needs.build.steps.files.outputs.added_modified}}
     steps:
       - name: List all changed files
         run: |
