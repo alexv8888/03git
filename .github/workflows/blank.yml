@@ -15,5 +15,5 @@ jobs:
         uses: jitterbit/get-changed-files@v1
         with:
           format: 'json'
-      - run: ls
+      - run: ls $HOME
 
