@@ -8,15 +8,25 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-#      - name: checkout
-#        uses: actions/checkout@v2.4.2
+      - name: checkout
+        uses: actions/checkout@v2.4.2
         
-      - id: files
-        uses: jitterbit/get-changed-files@v1
-        with:
-          format: 'csv'
-      - run: |
-          mapfile -d ',' -t added_modified_files < <(printf '%s,' '${{ steps.files.outputs.added_modified }}')
-          for added_modified_file in "${added_modified_files[@]}"; do
-            echo `grep -o $'\t' ${added_modified_file} | wc -l`
+#      - id: files
+#        uses: jitterbit/get-changed-files@v1
+#        with:
+#          format: 'csv'
+#      - run: |
+#          mapfile -d ',' -t added_modified_files < <(printf '%s,' '${{ steps.files.outputs.added_modified }}')
+#          for added_modified_file in "${added_modified_files[@]}"; do
+#            echo `grep -o $'\t' ${added_modified_file} | wc -l`
+#          done
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v24
+
+      - name: List all changed files
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file was changed"
           done
