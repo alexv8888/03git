@@ -22,6 +22,6 @@ jobs:
     steps:
       - name: Run a one-line script
         run: date
-        needs: [win, ubu]
+    needs: [win, ubu]
         
 
