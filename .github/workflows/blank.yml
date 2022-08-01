@@ -15,3 +15,5 @@ jobs:
       - uses: lots0logs/gh-action-get-changed-files@2.1.4
         with:
           token: ${{ secrets.TOKEN }}
+      - run: cat files.json
+      
