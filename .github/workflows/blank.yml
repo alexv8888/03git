@@ -21,11 +21,7 @@ jobs:
     needs: build
     strategy:
       matrix:
-        cf: ${{needs.build.steps.files.outputs.added_modified}}
+        cf: ${{fromJson(needs.build.steps.files.outputs.added_modified)}}
     steps:
       - name: List all changed files
-        run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "$file was changed" >> files.log 2>&1
-            echo "Count Tab in files: `grep -P '\t' $file | wc -l`" >> files.log 2>&1 
-          done
+        run: pwd
