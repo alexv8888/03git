@@ -13,6 +13,7 @@ jobs:
       - name: first
         uses: actions/checkout@v2.4.2
       - name: Upload a Build Artifact
+        run: hello > ./arti.txt
         uses: actions/upload-artifact@v3.1.0
         with:
           name: arti
