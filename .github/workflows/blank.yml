@@ -18,9 +18,10 @@ jobs:
         
   count:      
     runs-on: ubuntu-latest   
+    needs: build
     strategy:
       matrix:
-        cf: ${{fromJson(steps.files.outputs.removed)}}
+        cf: ${{fromJson(needs.build.steps.files.outputs.removed)}}
     steps:
       - name: List all changed files
         run: |
