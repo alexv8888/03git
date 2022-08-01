@@ -10,7 +10,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2.4.2
-        
+        with:
+          fetch-depth: 0        
 #      - id: files
 #        uses: jitterbit/get-changed-files@v1
 #        with:
