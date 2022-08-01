@@ -7,9 +7,6 @@ jobs:
   tabcount:
     runs-on: ubuntu-latest
     
-    strategy:
-      matrix:
-        xxx: [x]
         
     steps:
       - name: checkout
