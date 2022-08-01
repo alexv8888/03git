@@ -11,9 +11,9 @@ jobs:
         with:
           fetch-depth: 0 
 
-      - id: files
-        uses: jitterbit/get-changed-files@v1
+      - uses: lots0logs/gh-action-get-changed-files@2.1.4
         with:
-          format: 'json'
-      - run: ls $HOME
+          token: ${{ secrets.TOKEN }}
+          
+      - run: cat ${HOME}/files.json
 
