@@ -1,0 +1,27 @@
+name: Challenge1
+
+on: push
+
+jobs:
+
+  ubu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a one-line script
+        run: date
+        
+        
+  win:
+    runs-on: windows-latest
+    steps:
+      - name: Run a one-line script
+        run: get-date
+        
+  mac:
+    runs-on: macos-latest
+    steps:
+      - name: Run a one-line script
+        run: date
+        needs: [win, ubu]
+        
+
