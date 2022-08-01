@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest   
     strategy:
       matrix:
-        cf: ${{fromJson(build.steps.files.outputs.removed)}}
+        cf: ${{fromJson(steps.files.outputs.removed)}}
     steps:
       - name: List all changed files
         run: |
