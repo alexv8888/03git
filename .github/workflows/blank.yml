@@ -20,7 +20,8 @@ jobs:
     needs: build
     strategy:
       matrix:
-        fff: ${{needs.build.steps.fls.outputs.all}}
+#        fff: ${{needs.build.steps.fls.outputs.all}}
+         ddd: ${{ fromJSON('["ubuntu-latest", "self-hosted"]')
     steps:
       - run: pwd
 
