@@ -1,43 +1,29 @@
-name: 'tab count'
+name: tabcount
+on: push
 
-on: 
-  push:
-    branches:
-      - features/do_one
-      - dev
-      - master
 
 jobs:
-
-  checkout:
+  build:
     runs-on: ubuntu-latest
-    
+    name: changed-files
     steps:
-      - name: checkout
-        uses: actions/checkout@v2.4.2
-#        with:			 
-#          fetch-depth: 0       
-      
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 
 
-      
       - id: files
         uses: jitterbit/get-changed-files@v1
         with:
-          format: 'csv'
-      - run: |
-          mapfile -d ',' -t added_modified_files < <(printf '%s,' '${{ steps.files.outputs.added_modified }}')
-          for added_modified_file in "${added_modified_files[@]}"; do
-          echo "${added_modified_file} was changed" and has $(grep -o $'\t' ${added_modified_file} | wc -l) tabs
-          done
-
-#      - name: Get changed files
-#        id: changed-files
-#        uses: tj-actions/changed-files@v24
-#
-#      - name: List all changed files
-#        run: |
-#          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-#            echo "$file was changed" and has $(grep -o $'\t' $file | wc -l) tabs
-            
-#          done
-       
+          format: 'json'
+        
+  count:      
+    runs-on: ubuntu-latest   
+    needs: build
+    strategy:
+      matrix:
+        cf: ${{fromJson(needs.build.steps.files.outputs.added_modified)}}
+    steps:
+      - name: List all changed files
+        run: |
+            echo "${{matrix.cf}} was changed" 
+#            echo "Count Tab in files: `grep -P '\t' ${{matrix.cf}} | wc -l`" 
