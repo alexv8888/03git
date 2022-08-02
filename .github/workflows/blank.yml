@@ -24,7 +24,7 @@ jobs:
    needs: build
    strategy:
      matrix:
-       cf: echo "${{ steps.changed-files.outputs.filenames }}"
+       cf: ${{ steps.changed-files.outputs.filenames }}
    steps:
      - run: pwd
 
