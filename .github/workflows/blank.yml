@@ -15,7 +15,7 @@ jobs:
         id: changed-files
         with:
           token: ${{ secrets.TOKEN }}
-          output: 'string'
+          output: 'json'
       - name: Echo files
         run: |
             echo "${{ steps.changed-files.outputs.filenames }}"
