@@ -14,6 +14,11 @@ jobs:
       - uses: lots0logs/gh-action-get-changed-files@2.1.4
         with:
           token: ${{ secrets.TOKEN }}
-          
+  count:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ff: fromJson(${HOME}/files.json)
+    steps:
       - run: cat ${HOME}/files.json
 
