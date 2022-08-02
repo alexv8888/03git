@@ -7,15 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     name: changed-files
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0 
+#      - uses: actions/checkout@v2
+#       with:
+#        fetch-depth: 0 
           
-      - uses: DawChihLiou/changed-files@v1
+      - uses: DawChihLiou/changed-files-action@v1
         id: changed-files
         with:
           token: ${{ secrets.TOKEN }}
-          output: 'string'
+          output: 'json'
       - name: Echo files
         run: |
             echo "${{ steps.changed-files.outputs.filenames }}"
