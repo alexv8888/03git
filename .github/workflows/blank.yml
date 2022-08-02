@@ -21,7 +21,7 @@ jobs:
     needs: build
     strategy:
       matrix:
-        cf: ${{from.Json(needs.build.steps.files.outputs.added_modified)}}
+        cf: ${{fromJson(needs.build.steps.files.outputs.added_modified)}}
     steps:
       - name: List all changed files
         run: |
