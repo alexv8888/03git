@@ -1,5 +1,8 @@
 hello	world !
+<<<<<<< HEAD
 ok
 ok
 Mon Aug  1 11:58:31 PM +03 2022
 Tue Aug  2 12:14:59 AM +03 2022
+=======
+>>>>>>> 14b1525 (add tabfile)
