@@ -20,7 +20,7 @@ jobs:
     needs: build
     strategy:
       matrix:
-        include: ${{ fromJson(needs.build.steps.fls.outputs.all) }}
+        fff: ${{fromJSON(needs.build.steps.fls.outputs.all)}}
     steps:
-      - run: cat ${HOME}/files.json
+      - run: pwd
 
