@@ -24,7 +24,7 @@ jobs:
    needs: build
    strategy:
      matrix:
-       cf: ${{ fromJSON(needs.build.steps.changed-files.outputs.filenames) }}
+       cf: [${{needs.build.steps.changed-files.outputs.filenames}}]
    steps:
      - run: pwd
 
