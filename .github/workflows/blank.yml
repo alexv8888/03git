@@ -20,7 +20,7 @@ jobs:
     needs: build
     strategy:
       matrix:
-        ff: ${{ fromJson(needs.build.steps.fls.all) }}
+        ff: ${{ fromJson(needs.build.steps.fls.outputs.all) }}
     steps:
       - run: cat ${HOME}/files.json
 
