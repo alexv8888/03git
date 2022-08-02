@@ -1,4 +1,4 @@
-name: xx
+name: tabcount
 on: push
 
 
@@ -21,9 +21,9 @@ jobs:
     needs: build
     strategy:
       matrix:
-        cf: [2,3]                       #${{from.Json(needs.build.steps.files.outputs.added_modified)}}
+        cf: ${{from.Json(needs.build.steps.files.outputs.added_modified)}}
     steps:
       - name: List all changed files
         run: |
             echo "${{matrix.cf}} was changed" 
-    #        echo "Count Tab in files: `grep -P '\t' $file | wc -l`" 
+#            echo "Count Tab in files: `grep -P '\t' ${{matrix.cf}} | wc -l`" 
