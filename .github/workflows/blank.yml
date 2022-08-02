@@ -1,31 +1,23 @@
-name: xx
-on: push
-
-
+name: 'PR Detect changes'
+on: pull_request
 jobs:
-  build:
+  changes:
     runs-on: ubuntu-latest
-    name: changed-files
+    outputs:
+      packages: ${{ steps.filter.outputs.paths_changed }}
     steps:
-#      - uses: actions/checkout@v2
-#       with:
-#        fetch-depth: 0 
-          
-      - uses: DawChihLiou/changed-files-action@v1
-        id: changed-files
+      - uses: actions/checkout@v3
+      - name: Annotate PR
+        id: filter
+        uses: fabidick22/detect-changes-action@v1
         with:
-          token: ${{ secrets.TOKEN }}
-          output: 'json'
-      - name: Echo files
-        run: |
-            echo "${{ steps.changed-files.outputs.filenames }}"
-  count:
-   runs-on: ubuntu-latest
-   needs: build
-   strategy:
-     matrix:
-       cf: ${{fromJSON(needs.build.steps.changed-files.outputs.filenames)}}
-      
-   steps:
-     - run: pwd
+          path: "modules/"
 
+  build:
+    needs: changes
+    strategy:
+      matrix:
+        package: ${{ fromJSON(needs.changes.outputs.packages) }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo '${{ matrix.package }}'
