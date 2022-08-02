@@ -20,7 +20,7 @@ jobs:
     needs: build
     strategy:
       matrix:
-        fff: ${{fromJSON(needs.build.steps.fls.outputs.all)}}
+        fff: ${{needs.build.steps.fls.outputs.all}}
     steps:
       - run: pwd
 
