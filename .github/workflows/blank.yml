@@ -19,4 +19,10 @@ jobs:
       - name: Echo files
         run: |
             echo "${{ steps.changed-files.outputs.filenames }}"
+  count:
+   runs-on: ubuntu-latest
+   needs: build
+   strategy:
+     matrix:
+       cf: ${{ needs.build.steps.changed-files.outputs.filenames }}
 
