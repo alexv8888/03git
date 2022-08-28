@@ -5,7 +5,7 @@ on: pull_request
 jobs:
 
   tabcount:
-    runs-on: github-runner
+    runs-on: ubuntu-latest
    
     steps:
       - name: checkout
