@@ -1,11 +1,11 @@
-name: 'tab count'
+name: 'tab co unt'
 
 on: pull_request
 
 jobs:
 
   tabcount:
-    runs-on: ubuntu-latest
+    runs-on: github-runner
    
     steps:
       - name: checkout
